@@ -1,0 +1,408 @@
+\documentclass{exam} 
+\def\workshopTitle{Workshop - Workshop - Time Complexity} 
+\input{itec625workshopHeader}
+\section* {Learning outcomes}
+
+By the end of this session, you will have learnt the basics about time complexity.
+
+\section*{Questions}
+\begin{questions}
+
+\question What are the degrees of the following polynomials?
+
+\begin{equation}
+5x^3 + 3x - 7
+\end{equation}
+
+\ifprintanswers
+ANSWER: 3
+\else
+\fi
+
+\begin{equation}
+5x - 2x^6
+\end{equation}
+
+\ifprintanswers
+ANSWER: 6
+\else
+\fi
+
+\question What are the time complexities of the following codes?
+
+\begin{lstlisting}
+int x = 1;
+if(x % 2 == 0) {
+	x++;
+}
+else {
+	x--;
+}
+\end{lstlisting}
+
+\ifprintanswers
+ANSWER: $\mathcal{O}(1)$
+\else
+\fi
+
+\begin{lstlisting}
+for(int i=0; i < 100; i++) {
+	System.out.print(i+ " ");
+}
+\end{lstlisting}
+
+\ifprintanswers
+ANSWER: $\mathcal{O}(1)$
+\else
+\fi
+
+
+\begin{lstlisting}
+for(int i=0; i < n; i++) {
+	System.out.print(i+ " ");
+}
+\end{lstlisting}
+
+\ifprintanswers
+ANSWER: $\mathcal{O}(n)$
+\else
+\fi
+
+\begin{lstlisting}
+for(int i=0; i < n; i+=2) {
+	if(i%3 == 0) {
+		System.out.print(i+ ". ");
+	}
+	else {
+		if(i%5 == 0) {
+			System.out.print(i+ "! ");
+		}
+		else {
+			System.out.print(i+ "? ");
+		}
+	}
+}
+\end{lstlisting}
+
+\ifprintanswers
+ANSWER: $\mathcal{O}(n)$
+\else
+\fi
+
+
+\begin{lstlisting}
+for(int i=1; i < n; i*=2) {
+	System.out.print(i+ " ");
+}
+\end{lstlisting}
+
+\ifprintanswers
+ANSWER: $\mathcal{O}(log_2(n))$
+\else
+\fi
+
+\begin{lstlisting}
+for(int i=0; i < n; i+=n/5) {
+	System.out.print(i+ " ");
+}
+\end{lstlisting}
+
+\ifprintanswers
+ANSWER: $\mathcal{O}(1)$
+\else
+\fi
+
+\begin{lstlisting}
+for(int i=6; i < n/2; i++) {
+	System.out.print(i+ " ");
+}
+\end{lstlisting}
+
+\ifprintanswers
+ANSWER: $\mathcal{O}(n)$
+\else
+\fi
+
+
+\begin{lstlisting}
+for(int i=n/3; i < n/2; i+=4) {
+	System.out.print(i+ " ");
+}
+\end{lstlisting}
+
+\ifprintanswers
+ANSWER: $\mathcal{O}(n)$
+\else
+\fi
+
+
+\begin{lstlisting}
+for(double i=1; i*i <=n; i++) {
+	System.out.print(i+ " ");
+}
+\end{lstlisting}
+
+\ifprintanswers
+ANSWER: $\mathcal{O}(\sqrt{n})$
+\else
+\fi
+
+
+\begin{lstlisting}
+for(int i=0; i < n; i++) {
+	for(int k=0; k < n; k++) {
+		System.out.println(i+" ");
+	}
+}
+\end{lstlisting}
+
+\ifprintanswers
+ANSWER: $\mathcal{O}(n^2)$
+\else
+\fi
+
+\begin{lstlisting}
+for(int i=0; i < n; i++) {
+	for(int k=0; k < n; k++) {
+		if(i%3 == 0) {
+			System.out.print(i+ ". ");
+		}
+		else {
+			if(i%5 == 0) {
+				System.out.print(i+ "! ");
+			}
+			else {
+				System.out.print(i+ "? ");
+			}
+		}
+	}
+}
+\end{lstlisting}
+
+\ifprintanswers
+ANSWER: $\mathcal{O}(n^2)$
+\else
+\fi
+
+\begin{lstlisting}
+for(int i=n; i > 0; i-=2) {
+	for(int k=1; k <= n; k+=3) {
+		if(i%3 == 0) {
+			System.out.print(i+ ". ");
+		}
+		else {
+			if(i%5 == 0) {
+				System.out.print(i+ "! ");
+			}
+			else {
+				System.out.print(i+ "? ");
+			}
+		}
+	}
+}
+\end{lstlisting}
+
+\ifprintanswers
+ANSWER: $\mathcal{O}(n^2)$
+\else
+\fi
+
+\begin{lstlisting}
+for(int i=0; i < n; i++) {
+	for(int k=1; k <= n; k*=2) {
+		if(i%3 == 0) {
+			System.out.print(i+ ". ");
+		}
+		else {
+			if(i%5 == 0) {
+				System.out.print(i+ "! ");
+			}
+			else {
+				System.out.print(i+ "? ");
+			}
+		}
+	}
+}
+\end{lstlisting}
+
+\ifprintanswers
+ANSWER: $\mathcal{O}(n \times log_2(n))$
+\else
+\fi
+
+\begin{lstlisting}
+for(int i=1; i < n/2; i*=2) {
+	for(int k=1; k < n/2; k*=2) {
+		if(i%3 == 0) {
+			System.out.print(i+ ". ");
+		}
+		else {
+			if(i%5 == 0) {
+				System.out.print(i+ "! ");
+			}
+			else {
+				System.out.print(i+ "? ");
+			}
+		}
+	}
+}
+\end{lstlisting}
+
+\ifprintanswers
+ANSWER: $\mathcal{O}((log_2(n))^2)$
+\else
+\fi
+
+\begin{lstlisting}
+for(double i=1; i<=n; i+=1.0/n) {
+	System.out.print(i+ " ");
+}
+\end{lstlisting}
+
+
+\ifprintanswers
+ANSWER: $\mathcal{O}(n^2)$
+\else
+\fi
+
+
+\question What is the time complexities for the method \texttt{foo} in each of the following codes?
+
+\begin{lstlisting}
+void foo(int n) {
+	for(int i=0; i < n; i++) {
+		System.out.print(i+ " ");
+	}
+}
+\end{lstlisting}
+
+\ifprintanswers
+ANSWER: $\mathcal{O}(n)$
+\else
+\fi
+
+
+\begin{lstlisting}
+int foo(int n) {
+	int result = 0;
+	for(int i=0; i < n; i++) {
+		result+=bar(n);
+	}
+	return result;
+}
+
+int bar(int n) {
+	return n%2;
+}
+\end{lstlisting}
+
+\ifprintanswers
+ANSWER: $\mathcal{O}(n)$
+\else
+\fi
+
+\begin{lstlisting}
+int foo(int n) {
+	int result = 0;
+	for(int i=n; i > 0; i--) {
+		result+=bar(i);
+	}
+	return result;
+}
+
+int bar(int n) {
+	return n%2;
+}
+\end{lstlisting}
+
+\ifprintanswers
+ANSWER: $\mathcal{O}(n)$
+\else
+\fi
+
+\begin{lstlisting}
+int foo(int n) {
+	int result = 0;
+	for(int i=n; i > 0; i--) {
+		result+=bar(i);
+	}
+	return result;
+}
+
+int bar(int n) {
+	int total = 0;
+	for(int i=1; i<=n; i+=2) {
+		total+=i;
+	}
+	return total;
+}
+\end{lstlisting}
+
+\ifprintanswers
+ANSWER: $\mathcal{O}(n^2)$
+\else
+\fi
+
+\begin{lstlisting}
+int foo(int[] arr) {
+	for(int i=1; i < arr.length; i++) {
+		if(arr[i] < arr[i-1]) {
+			return false;
+		}
+	}
+	return true;
+}
+\end{lstlisting}
+
+\ifprintanswers
+ANSWER: 
+Best case: $\mathcal{O}(1)$ (when first item is less than second item)
+Worst case: $\mathcal{O}(n)$ (when each item is more than or equal to the item after it)
+\else
+\fi
+
+\question Write a piece of code with $\mathcal{O}(log_2n)$ time complexity.
+
+\ifprintanswers
+ANSWER: 
+\begin{lstlisting}
+int total = 0;
+for(int i=1; i<=n; i*=2) {
+	total = total + i;
+}
+\end{lstlisting}
+
+\else
+\fi
+
+\question Write a piece of code with a best case time complexity of $\mathcal{O}(n)$ and worst case time complexity of $\mathcal{O}(n^2)$.
+
+\ifprintanswers
+ANSWER: 
+\begin{lstlisting}
+int foo(int[] a) {
+	for(int i=0; i < a.length; i++) {
+		if(a[i]%2 == 0) { 
+			for(int k=0; k < a.length; k++) {
+				result+=a[k];
+			}
+		}
+	}
+	return result;
+}
+\end{lstlisting}
+Best case $\mathcal{O}(n)$ when all numbers are odd
+Worst case $\mathcal{O}(n^2)$ when all numbers are even
+\else
+\fi
+
+\question Is it possible to have a code with a best case time complexity of $\mathcal{O}(n^2)$ and worst case time complexity of $\mathcal{O}(n*log_2n)$?
+
+\ifprintanswers
+ANSWER: 
+No, best case time complexity cannot be worse than worst case time complexity.
+\else
+\fi
+
+\end{questions}
+\end{document}

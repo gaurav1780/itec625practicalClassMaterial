@@ -1,0 +1,296 @@
+\input{itec625workshopHeader} 
+\section*{Learning outcomes}
+
+This weeks workshop is about understanding variables and operators.
+
+\vspace{1em}
+\begin{questions}
+
+\question \textbf{Twos complement}
+
+Convert the following negative decimal numbers to binary assuming storage is in 1 byte and the first bit is used for sign:
+
+\begin{enumerate}
+\item -50
+\item -8
+\item -99
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}
+\item -50 = 11001110
+\item -8  = 11111000
+\item -99 = 10011101
+\end{enumerate}	
+\end{solution}
+
+\question \textbf{Storage}
+\vskip 0.5cm
+
+Can the following values be stored correctly in the data type assigned to them? If so, state the complete bit-pattern that the following variables are stored as, in the memory.
+
+\begin{lstlisting}
+short b = 28;
+int c = 53;
+byte a = 130;
+long d = 65536;
+short e = -203;
+\end{lstlisting}
+
+\begin{solution}
+\begin{lstlisting}
+short b = 28; //valid, 00000000 00011100
+int c = 53; 
+//valid, 00000000 00000000 00000000 00110101
+byte a = 130; //invalid
+long d = 65536; 
+//valid, 00000000 00000000 00000000 00000000 
+//       00000000 00000001 00000000 00000000
+short e = -203; //valid, 11111111 00110101
+\end{lstlisting}	
+\end{solution}
+
+\question \textbf{Number systems}
+\vskip 0.5cm
+
+Convert each of the following decimal numbers into binary, quinary (base-5) and nonary (base-9)
+
+\begin{enumerate}
+\item 8	
+\item 29
+\item 52
+\end{enumerate}
+
+\begin{solution}
+	
+\begin{enumerate}
+\item 8	in binary: 1000, in quinary: 13, in nonary: 8 
+\item 29 in binary: 11101, in quinary: 104, in nonary: 32 
+\item 52 in binary: 110100, in quinary: 202, in nonary: 57 
+\end{enumerate}
+\end{solution}
+
+\question \textbf{Converting to power of source base}
+
+In the lectures, we demonstrated a way to convert an integer $n$ from base-$p$ to base-$q$ when $q = p^k$ ($k$ being an integer more than 1).
+
+\begin{verbatim}
+EXAMPLE 1:
+
+n = 11101010, p = 2, q = 8 
+q = 2^3, therefore, k = 3
+Split n in groups of 3 (starting from right side)
+
+11 101 010
+
+Pad the first group if incomplete with 0s.
+
+011 101 010
+
+Convert each group to decimal individually.
+
+3 5 2
+
+Put it together. That's the number in base 8.
+
+Hence, 11101010 in base-2 = 352 in base-8.
+\end{verbatim}
+
+\newpage
+
+\begin{verbatim}
+EXAMPLE 2:
+
+n = 10201221
+p = 3
+q = 9
+q = 3^2, therefore, k = 2
+Split n in groups of 2 (starting from right side)
+
+10 20 12 21
+
+Pad the first group if incomplete with 0s - not applicable
+
+Convert each group to decimal individually.
+
+3 6 5 7
+
+Put it together. That's the number in base 9.
+
+Hence, 10201221 in base-3 = 3657 in base-9.
+\end{verbatim}
+
+
+Convert the following numbers (source and destination bases provided):
+
+\begin{enumerate}
+\item 11100010 in base-2 to base-4	
+\item 11100010 in base-2 to base-8
+\item 11100010 in base-2 to base-16	
+\item 120100121 in base-3 to base-9
+\item 310223201 in base-4 to base-16
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}
+\item 11100010 in base-2 = 3202 in base-4	
+\item 11100010 in base-2 = 342 in base-8
+\item 11100010 in base-2 = e2 in base-16	
+\item 120100121 in base-3 = 16317 in base-9
+\item 310223201 in base-4 = 34ae1 base-16
+\end{enumerate}	
+\end{solution}
+
+\question \textbf{Converting from power of destination base}
+\vskip 0.5cm
+
+Now we'll do the opposite - convert an integer $n$ from base-$q$ to base-$p$ when $q = p^k$ ($k$ being an integer more than 1).
+
+\begin{verbatim}
+EXAMPLE 1:
+
+n = e8f2
+q = 16
+p = 2
+q = 2^4, therefore, k = 4
+
+Convert each symbol to decimal and then to base p.
+
+e      8     f      2
+14     8     15     2
+1110   1000  1111   10
+
+Pad with leading zeroes to make groups of size k (4)
+
+1110   1000  1111   0010
+
+Put it together
+
+1110100011110010
+
+That's your number in base-p (2)
+
+Hence, e8f2 in base-16 = 1110100011110010 in base-2.
+\end{verbatim}
+
+Convert the following numbers (source and destination bases provided):
+
+\begin{enumerate}
+\item 5073 in base-9 to base-3
+\item abc123 in base-16 to base-2
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}
+\item 5073 in base-9 = 12002110 in base-3
+\item abc123 in base-16 = 10101011 11000001 00100011 base-2
+\end{enumerate}
+\end{solution}
+
+\question \textbf{Expressions}
+\vskip 0.5cm
+
+An expression is an operation evaluating to a specific value.
+
+What are the values of the following arithmetic expressions?
+
+\begin{enumerate}
+\item 17/5
+\item 1.0 + 16/5
+\item (1.0 + 16)/5
+\item 3 * ((2 + 5) / (4 - 1) + 17 \% 5)
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}
+\item 17/5 = 3
+\item 1.0 + 16/5 = 4.0
+\item (1.0 + 16)/5 = 3.4
+\item 3 * ((2 + 5) / (4 - 1) + 17 \% 5) = 12
+\end{enumerate}	
+\end{solution}
+
+\question \textbf{Boolean expressions}
+\vskip 0.5cm
+
+What are the values of the following boolean expressions?
+
+\begin{enumerate}
+\item true \&\& false
+\item true \&\& (false || true)
+\item true || false
+\item false || !(true || false)
+\item (5 >= 0 \&\& (5 <= 2 || 5 <= 10))
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}
+\item true \&\& false = false
+\item true \&\& (false || true) = true
+\item true || false = true
+\item false || !(true || false) = false
+\item (5 >= 0 \&\& (5 <= 2 || 5 <= 10)) = true
+\end{enumerate}	 
+\end{solution}
+
+
+\question \textbf{Bitwise operations}
+\vskip 0.5cm
+
+An expression is an operation evaluating to a specific value.
+
+What are the values of the following bitwise operations?
+
+\begin{enumerate}
+\item 21 \& 19
+\item 21 $|$ 19
+\item 21 \^{} 19
+\item 12 $<<$ 2
+\item 12 $>>$ 2
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}
+\item 21 \& 19 = 17
+\item 21 $|$ 19 = 23
+\item 21 \^{} 19 = 6
+\item 12 $<<$ 2 = 48
+\item 12 $>>$ 2 = 3
+\end{enumerate}	
+\end{solution}
+
+\question \textbf{Java program}
+\vskip 0.5cm
+
+Consider the following scenario:
+
+\textit{John takes 5 hours to paint 3 square meters while Jenny takes 15 hours to paint 7 square meters.}
+
+If they work together, how much time will they need to paint a wall whose area is 56 square meters? Also determine how much area John paints and how much area Jenny paints.
+
+First devise a solution on paper and verify your solution by ensuring that:
+
+\begin{verbatim}
+(area painted by john in determined time) +
+(area painted by jenny in the same determined time) = total area (56)
+\end{verbatim}
+
+Then, write a java program in Eclipse that solves the following problem. 
+
+IMPORTANT: Think about the types you'll use to store these values?
+
+\begin{solution}
+
+\begin{enumerate}
+	\item Calculate area that John can paint in an hour and area that Jenny can paint in an hour.
+	\item Calculate he total area they can paint in an hour working together.	
+	\item Using this and the total area that needs to be painted, compute the number of hours they should work together.
+	\item Calculate area painted by John and Jenny individually in that time.
+\end{enumerate}
+
+\lstinputlisting[language=java, basicstyle=\small]{Painting.java}
+\end{solution}
+
+
+\end{questions}
+\end{document}

@@ -1,0 +1,285 @@
+\input{itec625workshopHeader}
+
+\section*{Learning outcomes}
+
+This weeks workshop is about understanding defining and calling methods.
+
+\vspace{1em}
+\begin{questions}
+
+
+\question \textbf{Identify need for a method}
+
+Consider each of the following codes and identify if there is any need for a method?
+
+\begin{parts}
+\part
+\begin{lstlisting}
+int a = 7, b = 9, c;
+if(a > b) {
+	c = 1;
+}
+else if(a < b){
+	c = -1;
+}
+else {
+	c = 0;
+}
+
+int p = 5, q = 4, r;
+if(p > q) {
+	r = 1;
+}
+else if(p < q){
+	r = -1;
+}
+else {
+	r = 0;
+}
+
+int x = 8, y = 8, z;
+if(x > y) {
+	z = 1;
+}
+else if(x < y){
+	z = -1;
+}
+else {
+	z = 0;
+}
+\end{lstlisting}
+\newpage
+\ifprintanswers
+\begin{lstlisting}
+public class Client {
+	public static int compare(int n1, int n2) {
+		if(n1 > n2) {
+			return 1;
+		}
+		if(n1 < n2){
+			return -1;
+		}
+		return 0;
+	}//end compare
+
+	public static void main(String[] args) {
+		int a = 7 , b = 9;
+		int c = compare(a, b);
+		
+		int p = 5, q = 4;
+		int r = compare(p, q);
+		
+		int x = 8, y = 8;
+		int z = compare(x, y);
+	}//end main
+}//end class
+\end{lstlisting}
+\newpage
+\else
+\fi
+
+\part
+\begin{lstlisting}
+int a = 57, b = 10;
+int remainder = a%b;
+int n = a - remainder;
+if(remainder >= b/2) {
+	n = n + b;
+}
+
+int p = 17, q = 5;
+remainder = p%q;
+int r = p - remainder;
+if(remainder >= q/2) {
+	r = r + q;
+}
+\end{lstlisting}
+
+\ifprintanswers
+\begin{lstlisting}
+public class Client {
+	public static int roundOff(int n1, int n2) {
+		remainder = n1%n2;
+		int result = n1 - remainder;
+		if(remainder >= n2/2) {
+			result = result + n2;
+		}
+		return result;
+	}//end roundOff
+
+	public static void main(String[] args) {
+		int a = 57, b = 10;
+		int n = roundOff(a, b);
+		
+		int p = 17, q = 5;
+		int r = roundOff(p, q);
+	}//end main
+}//end class
+\end{lstlisting}
+\else
+\fi
+\end{parts}
+
+\question \textbf{Designing functions}
+Based on the lecture notes, draw a block diagram for methods,
+
+\begin{enumerate}
+\item when passed a number, returns \texttt{true} if the integer is even, and \texttt{false} otherwise. What is the data type for the input(s)? What is the data type for the return value/ output?
+
+\ifprintanswers
+solid arrow with text label "int" going from the caller to the method block "isEven" and dashed arrow with text label "boolean" going back to the caller.
+\else
+\fi
+
+\item when passed two numbers, returns \texttt{true} if they both have the same last digit, and \texttt{false} otherwise.  What is the data type for the input(s)? What is the data type for the return value/ output?
+
+\ifprintanswers
+solid arrow with text label "int, int" going from the caller to the method block "sameLastDigit" and dashed arrow with text label "boolean" going back to the caller.
+\else
+\fi
+
+\item when passed three boolean values, return the number of values that are \texttt{true}.  What is the data type for the input(s)? What is the data type for the return value/ output?
+
+\ifprintanswers
+solid arrow with text label "boolean, boolean, boolean" going from the caller to the method block "countTrues" and dashed arrow with text label "int" going back to the caller.
+\else
+\fi
+
+\end{enumerate}
+
+\question \textbf{Calling methods}
+Consider each of the following methods and write down a method call with actual parameters of your choice. You may assume that the calls are made from another method in the same class.
+
+Make sure you store the value returned (if any) in a variable of the correct data type and state the value of that variable as a comment.
+
+The first part is solved as an example.
+
+\begin{parts}
+
+\part
+\begin{lstlisting}
+public static int nDigits(int n) {
+	int result = 0;
+	while(n!=0) {
+		result++;
+		n=n/10;
+	}
+	return result;
+}
+\end{lstlisting}
+
+\textbf{SOLUTION} - Method call:
+\begin{lstlisting}
+int a = 452017;
+int k = nDigits(a); //k will be 6
+\end{lstlisting}
+\newpage
+
+\part
+\begin{lstlisting}
+public static boolean and(boolean a, boolean b) {
+	if(a == false)
+		return false;
+	if(b == false)
+		return false;
+	return true;
+}
+\end{lstlisting}
+
+\ifprintanswers
+\begin{lstlisting}
+boolean a = true, b = false;
+boolean c = and(a, b); //c is false
+\end{lstlisting}
+\else
+\fi
+
+\part
+\begin{lstlisting}
+public static int roundOff(double a) {
+	int b = (int)a;
+	double decimal = a - b;
+	if(decimal < 0.5)
+		return b;
+	else
+		return b+1;
+}	
+\end{lstlisting}
+
+\ifprintanswers
+\begin{lstlisting}
+double a = 31.6;
+int b = roundOff(a); //b is 32
+\end{lstlisting}
+\else
+\fi
+
+\part
+\begin{lstlisting}
+public static double average(int a, int b) {
+	return (a+b)/2.0; //not 2, but 2.0
+}	
+\end{lstlisting}
+
+\ifprintanswers
+\begin{lstlisting}
+int a = 4, b = 7;
+double c = average(a, b); //c is 5.5
+\end{lstlisting}
+\newpage
+\else
+\fi
+\end{parts}
+
+\question \textbf{Defining a method from scratch}
+
+Write down the definition for each of the methods for which you drew a block diagram in question 2.
+
+\ifprintanswers
+\begin{lstlisting}
+public static boolean isEven(int a) {
+	if(a%2 == 0) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+public static boolean sameLastDigit(int a, int b) {
+	if(a%10 == b%10) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+public static int countTrues(boolean a, boolean b, boolean c) {
+	int result = 0;
+	if(a)
+		result++;
+	if(b)
+		result++;
+	if(c)
+		result++;
+	return result;
+}
+\end{lstlisting}
+
+\else
+\fi
+
+\question \textbf{Implementation given method headers}.
+
+Import the project from archive file \texttt{methodsWorkshopTemplate} and implement as many methods as you can. Tests are provided in in class \texttt{AllInOneTest}. 
+
+We haven't provided a header for the method \texttt{sameOddity}. Read the specification and write down the method header and body. Then uncomment the corresponding test in class \texttt{AllInOneTest}.
+\end{questions}
+
+\ifprintanswers
+solutions provided in archive file
+\texttt{methodsWorkshopSolution}
+\else
+\fi
+\end{document}

@@ -1,0 +1,337 @@
+\documentclass{exam} 
+\printanswers 
+\def\workshopTitle{Workshop - Arrays} 
+\input{itec625workshopHeader}
+
+\section*{Learning outcomes}
+
+This weeks workshop is about understanding how to create an use arrays.
+
+\vspace{1em}
+\begin{questions}
+
+\question \textbf{Creating arrays}
+
+Create arrays that can hold values for,
+
+\begin{itemize}
+  \item number of cars sold be each of the 8 employees.
+  \item GPAs of 50 students.
+  \item number of days it rained in each month.
+  \item the state of each of the 100 switches in the house (whether it's on or off).
+\end{itemize}
+\ifprintanswers
+\begin{lstlisting}
+int[] carSales = new int[8];
+double[] gpas = new double[50];
+int[] daysRained = new int[12];
+boolean[] switchStates = new boolean[100];
+\end{lstlisting}
+\else
+\fi
+
+\question \textbf{Memory representation}
+
+Based on the convention used in the lecture, draw a memory diagram for the following code:
+
+\begin{lstlisting}
+int[] a = {20, 50, 30, 80, 10, 60};
+int[] b = {a[0], a[2], a[4]};
+int[] c = b;
+\end{lstlisting}
+\ifprintanswers
+\begin{tikzpicture}
+\memoryblock{colour = red!10!white, y = 6, width = 1, height = 1, array = {"a"}}
+\memoryblock{y = 2, x = 2, height = 5, array = {"20", "50", "30", "80", "10", "60"}}
+\memoryblock{colour = red!10!white, y = 6, x = 7, width = 1, height = 1, array = {"b"}}
+\memoryblock{colour = red!10!white, y = 4.5, x = 7, width = 1, height = 1, array = {"c"}}
+\memoryblock{x = 9, y = 5, array = {"20", "30", "10"}}
+\arrow{startX=0.8, startY=6.5, endX=2, endY=6.5}
+\arrow{startX=7.8, startY=6.5, endX=9, endY=6.5}
+\arrow{startX=7.8, startY=5.25, endX=9, endY=6.5}
+\end{tikzpicture}
+\else
+\fi
+
+\question \textbf{Tracing code involving arrays - 1}
+What is the state of the array \texttt{arr} when the following code is executed? 
+
+\begin{lstlisting}
+int[] arr = new int[8];
+for(int i=0; i < arr.length/2; i++) {
+	arr[i] = 2*i+1;
+}
+for(int i=arr.length/2; i < arr.length; i++) {
+	arr[i] = 2*(arr.length - i) - 1;
+}
+\end{lstlisting}
+\ifprintanswers
+\begin{verbatim}
+arr = {1,3,5,7,7,5,3,1}  
+\end{verbatim}
+\else
+\newpage
+\fi
+
+\question \textbf{Tracing code involving arrays - 2}
+What is the state of the array \texttt{arr} at the end of each iteration of the outer loop in the following code?
+\begin{lstlisting}
+int[] arr = {12, 30, 8, 2, 7, 15};
+for(int i=0; i < arr.length; i++) {
+	int dodo = i;
+	for(int k=i+1; k < arr.length; k++) {
+		if(arr[k] < arr[dodo]) {
+			dodo = k;
+		}
+	}
+	int temp = arr[i];
+	arr[i] = arr[dodo];
+	arr[dodo] = temp;	
+	//arr = ???
+}
+\end{lstlisting}
+\ifprintanswers
+The code sorts the array.
+\begin{verbatim}
+arr = {2, 7, 8, 12, 15, 30}  
+\end{verbatim}
+\else
+\fi
+
+\question \textbf{Basic operations on an array}
+Assume that there is an array \texttt{data} that has at least one item. Write a piece of code that stores the number of negative integers in the array.
+
+\ifprintanswers
+\begin{lstlisting}
+int countNegs = 0;
+for(int i=0; i < data.length; i++) {
+	if(data[i] < 0) {
+		countNegs++;
+	}
+}
+\end{lstlisting}
+\else
+\fi
+
+\question \textbf{Methods operating on arrays}
+Complete the following method's definition based on the javadoc.
+
+\begin{lstlisting}[style=junit]
+public class ArrayService {
+	/**
+	* @param arr
+	* @param min
+	* @param max: assume max >= min
+	* @return true if there is any value in array arr that lies
+	* in the range [min, max], false otherwise
+	* for example,
+	* if arr = {10, 70, 20, 90}, min = 30, max = 70, return true
+	* if arr = {10, 70, 20, 90}, min = 30, max = 60, return false
+	*/
+	public static boolean contains(int[] arr, int min, int max) {
+		return false; //to be completed
+	}
+}
+\end{lstlisting}
+
+Test you code using the following JUnit test case:
+
+\begin{lstlisting}[style=junit]
+@Test
+public void testContains() {
+	int[] a = {20, -50, 30, -40, 90};
+	assertTrue(ArrayService.contains(a, 10, 20));
+	assertTrue(ArrayService.contains(a, 30, 50));
+	assertTrue(ArrayService.contains(a, -60, -20));
+	assertTrue(ArrayService.contains(a, -50, -45));
+	assertTrue(ArrayService.contains(a, -45, -40));
+	
+	assertFalse(ArrayService.contains(a, -49, -41));
+	assertFalse(ArrayService.contains(a, 31, 89));
+	assertFalse(ArrayService.contains(a, -39, 19));
+}
+\end{lstlisting}
+\ifprintanswers
+\begin{lstlisting}
+public static boolean contains(int[] arr, int min, int max) {
+	if(arr == null)
+		return false;
+	for(int i=0; i < arr.length; i++) {
+		if(arr[i] >= min && arr[i] <= max) {
+			return true;
+		}
+	}
+	return false;
+}
+\end{lstlisting}
+\else
+\newpage
+\fi
+
+\question \textbf{Method operating on arrays - 2}
+Complete the following method's definition based on the javadoc.
+
+\begin{lstlisting}[style=junit]
+public class ArrayService {
+	/**
+	* @param a
+	* @param b
+	* @return true if a and b are identical, false otherwise
+	* for example,
+	* if a = {10, 70, 20}, b = {10, 70, 20}, return true
+	* if a = {10, 70, 20}, b = {10, 70, 20, 90}, return false
+	* if a = {10, 70, 20, 90}, b = {10, 70, 20}, return false
+	* if a = {10, 70, 20}, b = {10, 70, 30}, return false
+	* if a = {10, 70, 20}, b = {30, 70, 20}, return false
+	*/
+	public static boolean areIdentical(int[] a, int[] b) {
+		return false; //to be completed
+	}
+}
+\end{lstlisting}
+
+Test you code using the following JUnit test case:
+
+\begin{lstlisting}[style=junit]
+@Test
+public void testAreIdentical() {
+	int[] a = {20, -50, 30};
+	int[] b = {20, -50, 30};
+	assertTrue(ArrayService.areIdentical(a, b));
+
+	int[] c = {20, -50, 30};
+	int[] d = {20, -50, 30, 60};
+	assertFalse(ArrayService.areIdentical(c, d));
+
+	int[] e = {20, -50, 30, 60};
+	int[] f = {20, -50, 30};
+	assertFalse(ArrayService.areIdentical(e, f));
+
+	int[] g = {20, -50, 30};
+	int[] h = {20, -50, 40};
+	assertFalse(ArrayService.areIdentical(g, h));
+
+	int[] i = {20, -50, 30};
+	int[] j = {10, -50, 30};
+	assertFalse(ArrayService.areIdentical(i, j));
+}
+\end{lstlisting}
+\ifprintanswers
+\begin{lstlisting}
+public static boolean areIdentical(int[] a, int[] b) {
+	if(a==null || b==null)
+		return false;
+	if(a.length != b.length)
+		return false;
+	for(int i=0; i < a.length; i++) {
+		if(a[i] != b[i]) {
+			return false;
+		}
+	}
+	return true;
+}
+\end{lstlisting}
+\else
+\newpage
+\fi
+
+\question \textbf{Methods returning arrays}
+
+Define a method \texttt{getPositiveItems} that when passed an integer array, returns an array containing the positive items from that array. For example, 
+
+\begin{enumerate}
+	\item if the array passed = \texttt{\{-6, 0, 5, -2, -9, 1, 0, 0, 3\}}, return the array \texttt{\{5, 1, 3\}}.
+	\item if the array passed = \texttt{\{-6, 0, -2, -9, 0, 0\}}, return the array \texttt{\{\}}.
+\end{enumerate}
+\ifprintanswers
+\begin{lstlisting}
+public static int[] getPositiveItems(int[] a) {
+	if(a==null)
+		return null;
+	int count = 0;
+	for(int i=0; i < a.length; i++) {
+		if(a[i] > 0) {
+			count++;
+		}
+	}
+	int[] result = new int[count];
+	int destIndex = 0;
+	for(int i=0; i < a.length; i++) {
+		if(a[i] > 0) {
+			result[destIndex] = a[i];
+			destIndex++;
+		}
+	}
+	return result;
+}
+\end{lstlisting}
+
+\else
+\fi
+
+\question \textbf{(Advanced)}
+
+\begin{itemize}
+  \item Define a method that when passed two arrays (assume that all items within an array are different), returns an array containing items that exist in both arrays, in the order they exist in the first of the two arrays.
+  \item Define a method that when passed an array, returns an array holding the longest streak of items that are in ascending order.
+\end{itemize}
+\ifprintanswers
+\newpage
+\begin{lstlisting}[basicstyle=\small]
+public static int[] intersection(int[] a, int[] b) {
+	int count = 0;
+	for(int i=0; i < a.length; i++) {
+		int originalCount = count;
+		for(int k=0; k < b.length && count == originalCount; k++) {
+			if(a[i] == b[k]) {
+				count++;
+			}
+		}
+	}
+	int[] result = new int[count];
+	int destIndex = 0;
+	for(int i=0; i < a.length; i++) {
+		int before = destIndex;
+		for(int k=0; k < b.length && destIndex == before; k++) {
+			if(a[i] == b[k]) {
+				result[destIndex] = a[i];
+				destIndex++;
+			}
+		}
+	}
+	return result;
+}
+
+public static int[] getLongestAscendingStreak(int[] arr) {
+	int[] lengths = new int[arr.length];
+	for(int i=0; i < arr.length; i++) {
+		lengths[i] = 1;
+		boolean ascending = true;
+		for(int k=i+1; k < arr.length && ascending; k++) {
+			if(arr[k] >= arr[k-1]) {
+				lengths[i]++;
+			}
+			else {
+				ascending = false;
+			}
+		}
+	}
+	int max = 0;
+	for(int i=1; i < lengths.length; i++) {
+		if(lengths[i] > lengths[max]) {
+			max = i;
+		}
+	}
+	int[] result = new int[lengths[max]];
+	for(int i=0; i < result.length; i++) {
+		result[i] = arr[max+i];
+	}
+	return result;
+}
+\end{lstlisting}
+
+\else
+\fi
+
+\end{questions}	
+\end{document}
